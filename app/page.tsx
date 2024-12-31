@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <h1>Quéqué s2</h1>
+      <h1>Cabeça de coco</h1>
     </div>
   );
 }
