@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import SessionProvider from "@/components/session-provider";
+import { getServerSession } from "next-auth/next";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,14 +20,18 @@ export const metadata: Metadata = {
   description: "Encontre e baixe o firmware mais recente para sua TV",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SessionProvider session={session}>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
